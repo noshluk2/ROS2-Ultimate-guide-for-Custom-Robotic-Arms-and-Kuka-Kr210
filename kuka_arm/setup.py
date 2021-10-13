@@ -32,11 +32,10 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'action = kuka_arm.action_client_trajectory:main',
-            'straight_line_traj = kuka_arm.straight_line_trajectories:main',
-            'origin_traj = kuka_arm.trajectory_commander_a:main',
-            'random_traj = kuka_arm.trajectory_commander_b:main',
-            'ik_traj_xyz_arg = kuka_arm.inverse_kinematics:main'
+            'action = kuka_arm.4_action_client_trajectory:main',
+            'origin_traj = kuka_arm.1_trajectory_commander_a:main',
+            'random_traj = kuka_arm.2_trajectory_commander_b:main',
+            'ik_traj_xyz_arg = kuka_arm.3_inverse_kinematics:main'
         ],
     },
 )
