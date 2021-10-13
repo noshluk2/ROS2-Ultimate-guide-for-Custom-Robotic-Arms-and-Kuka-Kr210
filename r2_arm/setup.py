@@ -1,7 +1,7 @@
 from setuptools import setup
 from glob import glob
 import os
-package_name = 'kuka_arm'
+package_name = 'r2_arm'
 
 setup(
     name=package_name,
@@ -12,16 +12,9 @@ setup(
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
 
-        (os.path.join('share', package_name,'urdf'), glob('urdf/*')),
-
         (os.path.join('share', package_name,'launch'), glob('launch/*')),
-
-        (os.path.join('share', package_name,'config'), glob('config/*')),
-
-        (os.path.join('share', package_name,'meshes/visual/'), glob('meshes/visual/*')),
-
-        (os.path.join('share', package_name,'meshes/collision/'), glob('meshes/collision/*')),
-
+        (os.path.join('share', package_name,'urdf'), glob('urdf/*')),
+        (os.path.join('share', package_name,'meshes'), glob('meshes/*')),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -32,11 +25,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'action = kuka_arm.action_client_trajectory:main',
-            'straight_line_traj = kuka_arm.straight_line_trajectories:main',
-            'origin_traj = kuka_arm.trajectory_commander_a:main',
-            'random_traj = kuka_arm.trajectory_commander_b:main',
-            'ik_traj_xyz_arg = kuka_arm.inverse_kinematics:main'
+            'origin_traj = r2_arm.trajectory_commander_a:main',
+            'random_traj = r2_arm.trajectory_commander_b:main',
         ],
     },
 )

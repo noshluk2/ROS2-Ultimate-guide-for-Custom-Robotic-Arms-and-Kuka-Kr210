@@ -11,10 +11,9 @@ class Trajectory_publisher(Node):
         self.trajectory_publihser = self.create_publisher(JointTrajectory,publish_topic, 10)
         timer_period = 1
         self.timer = self.create_timer(timer_period, self.timer_callback)
-        self.joints = ['joint_1','joint_2','joint_3','joint_4','joint_5','joint_6','left_gripper_finger_joint','right_gripper_finger_joint']
-        self.goal_positions = [0.0,0.98,0.0,-0.0,-1.0,-0.0, 0.00,0.00]
-
-
+        self.joints = ['joint_1','joint_2','joint_4']
+        self.goal_positions = [2.0,1.2,1.2]
+        
 
     def timer_callback(self):
         bazu_trajectory_msg = JointTrajectory()

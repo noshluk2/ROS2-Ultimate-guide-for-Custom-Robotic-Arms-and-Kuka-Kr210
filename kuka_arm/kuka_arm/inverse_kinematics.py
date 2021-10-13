@@ -1,19 +1,21 @@
-import numpy
 import rclpy
 from rclpy.node import Node
 from builtin_interfaces.msg import Duration
 from trajectory_msgs.msg import JointTrajectory , JointTrajectoryPoint
 
-from spatialmath.base import *
-from spatialmath import SE3
-import math
-import roboticstoolbox as rtb
+import ikpy.chain
 import sys 
 import numpy as np
 
 
-# Near to the ground to check grab
-#-1.5 1 -1.5 c
+## Near to the ground to check grab
+#2.1 0 1.94
+## full strech right
+#3.33 0.05 0.66
+## Full strech up
+#0.47 0 3.78
+## Random
+# 0.63 -0.148 2.39
 
 class Trajectory_publisher(Node):
 
@@ -26,7 +28,7 @@ class Trajectory_publisher(Node):
         self.joints = ['joint_1','joint_2','joint_3','joint_4','joint_5','joint_6','left_gripper_finger_joint','right_gripper_finger_joint']
         
         ## Toolbox interface
-        self.robot_dh_table()
+        self.robot_initialize()
         argv = sys.argv[1:] 
         self.inverse_kinematics_solution(float(argv[0]),float(argv[1]),float(argv[2]),argv[3] ) # point 
     
@@ -40,31 +42,24 @@ class Trajectory_publisher(Node):
         ## adding newly created point into trajectory message
         bazu_trajectory_msg.points.append(point)
         self.trajectory_publihser.publish(bazu_trajectory_msg)
-        # print("\nTrajectory Sent !\n")
+        print("\nTrajectory Sent !\n")
 
-    def robot_dh_table(self):
-        Link_1=rtb.DHLink(0.75 , -math.pi/2,   0  , 0.35)
-        Link_2=rtb.DHLink(0    ,    0      ,   0  , 1.25)
-        Link_3=rtb.DHLink(0    , -math.pi/2,   0  , -0.054)
-        Link_4=rtb.DHLink(1.5  ,  math.pi/2,   0  , 0)
-        Link_5=rtb.DHLink(0    , -math.pi/2,   0  , 0)
-        Link_6=rtb.DHLink(0.303,    0      ,   0  , 0)
-        self.kuka_robot= rtb.DHRobot([Link_1 ,Link_2,Link_3,Link_4,Link_5,Link_6])
+    def robot_initialize(self):
+        self.kuka_robot = ikpy.chain.Chain.from_urdf_file("/home/luqman/r2_ra_ws/src/kuka_arm/urdf/kuka_model.urdf")
     
-    def get_fk_solution(self,angles_rad):
-        angles=np.array(angles_rad)
-        angles_rad=np.radians(angles)
-        T=self.kuka_robot.fkine(angles_rad)
+    def get_fk_solution(self):
+        T=self.kuka_robot.forward_kinematics([0] * 9)
         print("\nTransformation Matrix :\n",T)
     
     def inverse_kinematics_solution(self,x,y,z,claw):
-        point = SE3(x,y,z)
+        angles=self.kuka_robot.inverse_kinematics([x,y,z])
+        angles=np.delete(angles, [0,7,8])
         if (claw=="o"):
             print("\nClaw Open\n")
-            self.goal_positions = list(np.append(self.kuka_robot.ikine_LM(point)[0] ,[-0.01,-0.01]) )
+            self.goal_positions = list(np.append(angles ,[-0.01,-0.01]) )
         else:
             print("\nClaw Closed\n")
-            self.goal_positions = list(np.append(self.kuka_robot.ikine_LM(point)[0] ,[0.06, 0.06]) )
+            self.goal_positions = list(np.append(angles ,[0.06, 0.06]) ) 
         print("\nInverse Kinematics Solution :\n" ,self.goal_positions)
 
 
