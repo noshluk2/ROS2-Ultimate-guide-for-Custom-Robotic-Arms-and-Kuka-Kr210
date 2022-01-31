@@ -19,7 +19,7 @@
 This is repository for the course **ROS2 Ultimate guide for Kuka 6 DOF and Custom Robotic Arms** availble at Udemy . Complete source code is open sourced . Notes are also attached in root of the repository.
 
  ![alt text](https://github.com/noshluk2/ROS2-Ultimate-guide-for-Custom-Robotic-Arms-and-Kuka-Kr210/blob/main/Image_resources/ROS1%20Robotic%20Arm%20for%20Begginers.png)
-- **[[Get course Here]](https://www.udemy.com/course/ros2-ultimate-guide-for-kuka-6-dof-and-custom-robotic-arms/?couponCode=WP_STUDENTS_)**
+- **[[Get course Here]](https://www.udemy.com/course/ros2-ultimate-guide-for-kuka-6-dof-and-custom-robotic-arms/?couponCode=GITHUB_)**
 ----
 ## Using this Repository
 * Move into your workspace/src folder
@@ -64,9 +64,9 @@ echo "source /path/to/catkin-ws/devel/setup.bash" >> ~/.bashrc
 * **Building Custom Robotic Arm BIG BAZU** 
   -  ![alt text](https://github.com/noshluk2/ROS2-Ultimate-guide-for-Custom-Robotic-Arms-and-Kuka-Kr210/blob/main/Image_resources/bazu_creation.gif)
 * **BIG BAZU Controllers Test** 
-  -  ![alt text](https://github.com/noshluk2/ROS2-Ultimate-guide-for-Custom-Robotic-Arms-and-Kuka-Kr210/blob/main/Image_resources/bazu_jtc)
+  -  ![alt text](https://github.com/noshluk2/ROS2-Ultimate-guide-for-Custom-Robotic-Arms-and-Kuka-Kr210/blob/main/Image_resources/bazu_jtc.gif)
 * **Forward and Inverse Kinematics Solutions** 
-  -  ![alt text](https://github.com/noshluk2/ROS2-Ultimate-guide-for-Custom-Robotic-Arms-and-Kuka-Kr210/blob/main/Image_resources/kuka_jtc)
+  -  ![alt text](https://github.com/noshluk2/ROS2-Ultimate-guide-for-Custom-Robotic-Arms-and-Kuka-Kr210/blob/main/Image_resources/kuka_jtc.gif)
 * **Drawing Shapes**
   - ![alt text](https://github.com/noshluk2/ROS2-Ultimate-guide-for-Custom-Robotic-Arms-and-Kuka-Kr210/blob/main/Image_resources/kuka_sqaure.gif)
 
@@ -81,7 +81,7 @@ echo "source /path/to/catkin-ws/devel/setup.bash" >> ~/.bashrc
 ## Link to the Course
 Below is a discounted coupon for people who want to take the course in which more explaination to this code has been added
 
-**[[Get course Here]](https://www.udemy.com/course/ros2-ultimate-guide-for-kuka-6-dof-and-custom-robotic-arms/?couponCode=WP_STUDENTS_)**
+**[[Get course Here]](https://www.udemy.com/course/ros2-ultimate-guide-for-kuka-6-dof-and-custom-robotic-arms/?couponCode=GITHUB_)**
 
 ----
 ## Notes
