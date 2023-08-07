@@ -28,26 +28,36 @@ def generate_launch_description():
                 output="screen",
                 arguments=[urdf_file],
             ),
-            
-            Node(
-                package="controller_manager",
-                executable="ros2_control_node",
-                parameters=[robot_description, controller_file],
-                output={
-                    "stdout": "screen",
-                    "stderr": "screen",
-                },
+            ExecuteProcess(
+        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
+             'joint_state_broadcaster'],
+        output='screen'
             ),
-            Node(
-            package="controller_manager",
-            executable="spawner.py",
-            arguments=["joint_state_broadcaster", "--controller-manager", "/controller_manager"],
-                ),
 
-            Node(
-                package="controller_manager",
-                executable="spawner.py",
-                arguments=["joint_trajectory_controller", "-c", "/controller_manager"],
+            ExecuteProcess(
+        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
+             'joint_trajectory_controller'],
+        output='screen'
             )
+            # Node(
+            #     package="controller_manager",
+            #     executable="ros2_control_node",
+            #     parameters=[robot_description, controller_file],
+            #     output={
+            #         "stdout": "screen",
+            #         "stderr": "screen",
+            #     },
+            # ),
+            # Node(
+            # package="controller_manager",
+            # executable="spawner.py",
+            # arguments=["joint_state_broadcaster", "--controller-manager", "/controller_manager"],
+            #     ),
+
+            # Node(
+            #     package="controller_manager",
+            #     executable="spawner.py",
+            #     arguments=["joint_trajectory_controller", "-c", "/controller_manager"],
+            # )
         ]
     )
