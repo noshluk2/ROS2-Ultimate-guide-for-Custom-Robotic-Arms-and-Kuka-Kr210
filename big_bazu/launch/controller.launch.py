@@ -4,7 +4,7 @@ from launch import LaunchDescription
 from launch.actions import ExecuteProcess
 from launch_ros.actions import Node
 from scripts import GazeboRosPaths
-
+ 
 def generate_launch_description():
     package_share_dir = get_package_share_directory("big_bazu")
     urdf_file = os.path.join(package_share_dir, "urdf", "big_bazu_.urdf")
@@ -29,13 +29,13 @@ def generate_launch_description():
                 arguments=[urdf_file],
             ),
             ExecuteProcess(
-        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
+        cmd=['ros2', 'control', 'load_controller', '--set-state', 'start',
              'joint_state_broadcaster'],
         output='screen'
             ),
-
+ 
             ExecuteProcess(
-        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
+        cmd=['ros2', 'control', 'load_controller', '--set-state', 'start',
              'joint_trajectory_controller'],
         output='screen'
             )
@@ -53,7 +53,7 @@ def generate_launch_description():
             # executable="spawner.py",
             # arguments=["joint_state_broadcaster", "--controller-manager", "/controller_manager"],
             #     ),
-
+ 
             # Node(
             #     package="controller_manager",
             #     executable="spawner.py",
